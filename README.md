@@ -1,4 +1,4 @@
-# -Designing-ECG-Monitoring-Healthcare-System-with-Federated-Transfer-Learning-and-Explainable-AI
+# Designing-ECG-Monitoring-Healthcare-System-with-Federated-Transfer-Learning-and-Explainable-AI
 Code for the paper:
 To run the code You will need to have the following installed in respective devices.
 The python File named with FL with XAI(server) contains code for the  server. And the python File named with FL with XAI(clients) contains code for the  clients.
