@@ -163,9 +163,7 @@ callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 autoencoder.compile(optimizer='RMSprop', loss='mse')
 autoencoder.summary()
 
-#-----------------------------------------Model Fit--------------------------------------------------------------------------
 
-#-----------------------------------------Print autoencoder metrics------------------------------------
 
 #------------------------------------------classifier-------------------------------------------------
 def fc(enco):
@@ -189,11 +187,10 @@ from keras.layers import Dense
 from sklearn import svm
 import numpy as np
 
-ip = '172.23.33.7'
-#ip='192.168.0.193'
-port = 65432
+ip = 'xxx.xx.xx.xx' #write the IP of host (server)
+port = xxxx #Port number of host opened for communication.
 
-number_clients=2
+number_clients=x #reaplace  x with number of edge devices
 
 global count
 count=0
@@ -223,7 +220,7 @@ ave_weights=[i * 0 for i in ave_weights]
 ave_weights_auto=autoencoder.get_weights()
 ave_weights_auto=[i * 0 for i in ave_weights_auto]
 
-weight_scalling_factor=100000/120000
+weight_scalling_factor=100000/120000  # repalce n_i and , n with number of samples of a given edge and total number of samples.
 
 
 def scale_model_weights(weight, scalar):
@@ -317,7 +314,7 @@ def ClientThread_send(conn,address,weights):
     if counter1<number_clients:
         conn.send(autoencoder)
         counter1=counter1+1
-        weight_scalling_factor=100000/100000
+        weight_scalling_factor=n_i/n  # repalce n_i and , n with number of samples of a given edge and total number of samples.
         print("Autoencoder Sent to :",address)
         print("waiting for weights")
         model_recv=conn.recv(1024)
