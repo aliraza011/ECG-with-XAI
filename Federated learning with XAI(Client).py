@@ -127,17 +127,17 @@ def featureNormalize(dataset):
     mu = np.mean(dataset,axis=0)
     sigma = np.std(dataset,axis=0)
     return (dataset-mu)/sigma
-#normalize mean ok
+#normalize mean 
 X_train_noise=(X_train_noise-X_train_noise.mean())/X_train_noise.std()
 X_test_noise=(X_test_noise-X_test_noise.mean())/X_test_noise.std()
 
 
 plt.show()
 s= MLSocket() 
-HOST = '172.23.33.7'
-PORT = 65432
+HOST = 'xxx.xx.xx.xx' #write the IP of host (server)
+PORT = xxxx #Port number of host opened for communication.
 s.connect((HOST, PORT)) # Connect to the port and host
-autoencoder = s.recv(1024)
+autoencoder = s.recv(1024) #receive the model for server
 def scheduler(epoch, lr):
        if epoch < 40:
         return lr
