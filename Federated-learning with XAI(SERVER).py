@@ -256,10 +256,9 @@ def classified_class(target_class):
 def Grad_cam(model, input_test,sample_number,autoencoder):
     
     array = np.array(input_test[sample_number])
-    # `array` is a float32 Numpy array of shape (299, 299, 3)
-    #print("array:",array.shape)   
+    
     # We add a dimension to transform our array into a "batch"
-    # of size (1, 299, 299, 3)
+  
     array = np.expand_dims(array, axis=0)
     #print("array:",array.shape) 
     predict = model.predict(array)
@@ -276,10 +275,7 @@ def Grad_cam(model, input_test,sample_number,autoencoder):
     output = conv_outputs[0] #activations maps from last conv layer
     grads = tape.gradient(loss, conv_outputs) #function to obtain gradients from last conv layer
 
-    #print("grads shape:", grads.shape)
-    #print("Model output (loss for the target class):", loss.shape)
-    #print("Output from lat conv layer", conv_outputs.shape)
-    #print("Output from lat conv layer", conv_outputs.shape)
+  
     pooled_grad= tf.reduce_mean(grads, axis=(0, 1))
     conv_outputs=conv_outputs.numpy()
     pooled_grad = pooled_grad.numpy()
@@ -301,7 +297,6 @@ def Grad_cam(model, input_test,sample_number,autoencoder):
     plt.xlim(0,188)
     plt.ylim(0,100)
     plt.title('Grad_CAM Diagram of Classified ECG Signal')
-
     plt.savefig("draw_on_image_03.png")
     plt.show()
     return big_heatmap
