@@ -260,12 +260,12 @@ def Grad_cam(model, input_test,sample_number,autoencoder):
     # We add a dimension to transform our array into a "batch"
   
     array = np.expand_dims(array, axis=0)
-    #print("array:",array.shape) 
+     
     predict = model.predict(array)
     target_class = np.argmax(predict[0])
     classified_class(target_class)
-    #print("Target Class = ", target_class, "corresponding to:", predict, "Obese is [0., 1.]")
-    last_conv = model.get_layer('conv1d_7') #last_conv= model.layers[8]
+    
+    last_conv = model.get_layer('conv1d_7') #last_conv
     grad_model = tf.keras.models.Model([model.inputs], [last_conv.output, model.output])
 
     with tf.GradientTape() as tape:
