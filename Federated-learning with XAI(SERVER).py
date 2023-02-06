@@ -11,19 +11,17 @@ import socket
 import pickle
 import threading
 import time
-
 import pygad
 import pygad.nn
 import pygad.gann
 import numpy
-
-import pygad
-import pygad.nn
-import pygad.gann
-import numpy
-
 import pandas as pd
 import seaborn as sns
+#import socket 
+#from threading import Thread 
+#import threading 
+#from _thread import *
+#import time
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -41,6 +39,11 @@ from keras.models import Sequential
 from keras.layers import Convolution1D, ZeroPadding1D, MaxPooling1D, BatchNormalization, Activation, Dropout, Flatten, Dense
 from keras.layers import Conv1D, Dense, MaxPool1D, Flatten, Input
 import tensorflow as tf
+from mlsocket import MLSocket
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn import svm
+import numpy as np
 from sklearn.utils import resample
 from sklearn.model_selection import train_test_split
 from tensorflow.keras import datasets, layers, models
@@ -49,8 +52,9 @@ from sklearn.preprocessing import label_binarize
 from tensorflow.keras.models import Sequential, load_model
 import cv2
 import h5py
-#-----------------------------------------Datan Preparation--------------------------------------------------------------------------
 warnings.filterwarnings('ignore')
+#-----------------------------------------Data Preparation--------------------------------------------------------------------------
+
 train_df=pd.read_csv('mitbih_train.csv',header=None)
 test_df=pd.read_csv('mitbih_test.csv',header=None)
 
@@ -129,7 +133,7 @@ X_test_noise=(X_test_noise-X_test_noise.mean())/X_test_noise.std()
 
 
 plt.show()
-#-----------------------------------------Autoencoder Design--------------------------------------------------------------------------
+#-----------------------------------------Autoencoder Architecture--------------------------------------------------------------------------
 def encoder(input_data):
     #encoder
     
@@ -150,7 +154,7 @@ def decoder(encoded):
     x = layers.UpSampling1D(2)(x)
     decoded = layers.Conv1D(1, 3, activation='relu',padding='same')(x)
     return decoded
-#----------------------------------------------Model Compile---------------------------------------------------------------------
+#----------------------------------------------Model Compiling---------------------------------------------------------------------
 input_data = keras.Input(shape=(X_train_noise.shape[1], 1))
 autoencoder = keras.Model(input_data, decoder(encoder(input_data)))
 opt = keras.optimizers.RMSprop(learning_rate=0.00001)
@@ -165,7 +169,7 @@ autoencoder.summary()
 
 
 
-#------------------------------------------classifier-------------------------------------------------
+#------------------------------------------classifier Architecture-------------------------------------------------
 def fc(enco):
     x = layers.Conv1D(64, kernel_size=3, activation='relu', padding='same')(enco)
     
@@ -181,11 +185,7 @@ encode = encoder(input_data)
 classifier=Model(input_data,fc(encode))
 #-----------------------------------------Assign weights------------------------------------------------
 
-from mlsocket import MLSocket
-from keras.models import Sequential
-from keras.layers import Dense
-from sklearn import svm
-import numpy as np
+
 
 ip = 'xxx.xx.xx.xx' #write the IP of host (server)
 port = xxxx #Port number of host opened for communication.
@@ -200,11 +200,7 @@ global counter2
 counter2=0
 global ave_weights
 global ave_weights_auto
-import socket 
-from threading import Thread 
-import threading 
-from _thread import *
-import time
+
 
 s=MLSocket()
 try:
