@@ -48,8 +48,9 @@ from tensorflow.keras.models import Sequential, load_model
 import cv2
 import h5py
 from sklearn.model_selection import train_test_split
-#-----------------------------------------Datan Preparation--------------------------------------------------------------------------
 warnings.filterwarnings('ignore')
+#-----------------------------------------Datan Preparation--------------------------------------------------------------------------
+
 train_df=pd.read_csv('mitbih_train.csv',header=None)
 test_df=pd.read_csv('mitbih_test.csv',header=None)
 
@@ -148,7 +149,7 @@ callback = tf.keras.callbacks.LearningRateScheduler(scheduler)
 autoencoder.compile(optimizer='RMSprop', loss='mse')
 autoencoder.summary()
 
-#-----------------------------------------Model Fit--------------------------------------------------------------------------
+#-----------------------------------------Model Fitting--------------------------------------------------------------------------
 trained_autoencoder=autoencoder.fit(X_train_noise,X_train,epochs=50,
                     batch_size=100,
                     shuffle=True,
@@ -173,7 +174,7 @@ plt.figure()
 
 
 s.send(autoencoder)
-#-----------------------------------------Model Fit--------------------------------------------------------------------------
+#-----------------------------------------Model Fitting--------------------------------------------------------------------------
 
 def scheduler2(epoch, lr):
        if epoch < 90:
