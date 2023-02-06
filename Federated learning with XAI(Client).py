@@ -49,7 +49,7 @@ import cv2
 import h5py
 from sklearn.model_selection import train_test_split
 warnings.filterwarnings('ignore')
-#-----------------------------------------Datan Preparation--------------------------------------------------------------------------
+#-----------------------------------------Data Preparation--------------------------------------------------------------------------
 
 train_df=pd.read_csv('mitbih_train.csv',header=None)
 test_df=pd.read_csv('mitbih_test.csv',header=None)
